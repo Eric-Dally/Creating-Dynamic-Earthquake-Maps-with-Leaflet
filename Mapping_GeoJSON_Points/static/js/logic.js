@@ -1,5 +1,5 @@
-// Create the map object with center at the San Francisco airport.
-let map = L.map('mapid').setView([37.6213, -122.3790], 11);
+// Create the map object with center and zoom level.
+let map = L.map('mapid').setView([30, 30], 2);
 
 // // We create the tile layer that will be the background of our map.
 let streets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token={accessToken}', {
@@ -56,12 +56,49 @@ let sanFranAirport =
 // }).addTo(map);
 
 //Edit GeoJSON using the onEachFeature Function: Plus Skill Drill for Pop-up
-L.geoJson(sanFranAirport, {
-  // We turn each feature into a marker on the map.
+// L.geoJson(sanFranAirport, {
+//   // We turn each feature into a marker on the map.
+//   onEachFeature: function(feature, layer) {
+//     console.log(layer);
+//     layer.bindPopup("<h2> Airport code: " + feature.properties.faa + 
+//     "</h2> <hr> <h3> Airport name: " + feature.properties.name + "</h3>");
+//   }
+
+// }).addTo(map);
+
+//import raw JSON Data from your github:
+// Accessing the airport GeoJSON URL
+let airportData = "https://raw.githubusercontent.com/Eric-Dally/Mapping_Earthquakes/Mapping_GeoJSON_Points/majorAirports.json";
+
+// Grabbing our GeoJSON data.
+d3.json(airportData).then(function(data) {
+  console.log(data);
+// Creating a GeoJSON layer with the retrieved data.
+L.geoJson(data, {
+
+//Skill Drill: Trying the onEachFeature function to creat popup markers:
   onEachFeature: function(feature, layer) {
     console.log(layer);
-    layer.bindPopup("<h2> Airport code: " + feature.properties.faa + 
+    layer.bindPopup("<h2> Airport code: " + feature.properties.faa +
     "</h2> <hr> <h3> Airport name: " + feature.properties.name + "</h3>");
-  }
+    }
+  }).addTo(map);
+})
 
-}).addTo(map);
+
+// for (var i = 0; i < airportData.length; i++) {
+//   var jdata = airportData[i]
+//   L.marker(jdata.coordinates)
+//     .bindPopup("<h2> Airport code: " + jdata.faa + 
+//     "</h2> <hr> <h3> Airport name: " + jdata.name + "</h3>")
+//     .addTo(map);
+// }});
+
+//Original Code:
+// Grabbing our GeoJSON data.
+//d3.json(airportData).then(function(data) {
+  //console.log(data);
+// Creating a GeoJSON layer with the retrieved data.
+// L.geoJson(data).addTo(map);
+// });
+
