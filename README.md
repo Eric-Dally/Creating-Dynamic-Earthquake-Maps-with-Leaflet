@@ -8,4 +8,8 @@ By gathered data from the U.S. Geological Survey ("USGS") website, I created a d
 
 <img width="768" alt="Screen Shot 2021-09-09 at 8 04 02 PM" src="https://user-images.githubusercontent.com/82424250/132782242-a65b18f2-1c67-4f7a-8aa5-88135e610d13.png">
 
-
+## Technologies Used:
+* PLotly
+* D3
+* Javascript,
+* HTML
